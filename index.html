@@ -370,7 +370,17 @@
   </script>
 
 <div class="buttons">
-  <button onclick="alert('Ты бегаешь кругами, будто знаешь, что ты делаешь,<br>
+  <button class="fancy-btn" onclick="showTranslation()">Translation</button>
+  <button class="fancy-btn" onclick="showDiscussion()">Discussion</button>
+</div>
+
+<!-- Translation Modal -->
+<div id="translationModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('translationModal')">&times;</span>
+    <h2>Translation</h2>
+    <p>
+     Ты бегаешь кругами, будто знаешь, что ты делаешь,<br>
 Ты провоцируешь меня, чтобы я тебя заметил.<br>
 Ты кричишь мне, будто я что-то должен,<br>
 Но, милая, я давно уже ничего не должен.<br>
@@ -384,6 +394,7 @@
 Чтобы убедиться, что я всё ещё рядом.<br>
 Ты делаешь это, потому что знаешь — это сработает.<br>
 Ты просто хочешь внимания.<br>
+
 
 Я знал с самого начала,<br>
 Ты бежала ко мне, когда с ним не срослось.<br>
@@ -400,19 +411,159 @@
 Ты делаешь это, потому что знаешь — это сработает.<br>
 Ты просто хочешь внимания.<br>
 
+
 Что ж, может, ты должна просто оставаться подальше от меня,<br>
 Я тебе не игрушка.<br>
 Я не тот, с кем можно так обращаться.<br>
 Так почему ты всё ещё звонишь мне?<br>
 
+
 Ты просто хочешь внимания...<br>
 Ты не хочешь быть одна,<br>
 Но и со мной — тоже нет.<br>
 Ты просто хочешь внимания…<br>
-
-!')">Translate</button>
-  <button onclick="alert('Let's discuss questions coming soon!')">Let’s discuss</button>
+    </p>
+  </div>
 </div>
+
+<!-- Discussion Modal -->
+<div id="discussionModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('discussionModal')">&times;</span>
+    <h2>Discussion Questions</h2>
+    <ol>
+      <li>What do you think the main message of the song is? Do you think the narrator is right to feel the way he does? Why or why not?</li>
+      <li>Have you ever experienced a situation where someone wanted attention but not a real relationship? How did you handle it?</li>
+      <li>Do you think the girl in the song is acting intentionally, or is she just confused about her feelings? Explain.</li>
+    </ol>
+  </div>
+</div>
+
+<script>
+  function showTranslation() {
+    const modal = document.getElementById("translationModal");
+    modal.style.display = "block";
+    modal.classList.add("open"); // Add the 'open' class to trigger the fade-in animation
+  }
+
+  function showDiscussion() {
+    const modal = document.getElementById("discussionModal");
+    modal.style.display = "block";
+    modal.classList.add("open"); // Add the 'open' class to trigger the fade-in animation
+  }
+
+  function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.classList.remove("open");
+    setTimeout(function () {
+      modal.style.display = "none";
+    }, 300);  // Match the fade-out duration
+  }
+
+  window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+      closeModal(event.target.id);
+    }
+  }
+</script>
+
+<style>
+  /* Background overlay for modals */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7); /* Darker background */
+    padding-top: 60px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Modal content */
+  .modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 12px;
+    width: 70%;
+    max-width: 800px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Close button styling */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+  }
+
+  /* Fade-in animation for modals */
+  .modal.open .modal-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .modal.open {
+    opacity: 1;
+  }
+
+  /* Fancy buttons for modals */
+  .fancy-btn {
+    background-color: #6c5ce7;
+    color: white;
+    font-size: 16px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .fancy-btn:hover {
+    background-color: #a29bfe;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .fancy-btn:active {
+    transform: scale(0.98);
+  }
+
+  /* Modal title */
+  .modal-content h2 {
+    color: #6c5ce7;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  /* Modal text */
+  .modal-content p,
+  .modal-content ol {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .modal-content ol {
+    margin-top: 20px;
+  }
+</style>
 
 </body>
 </html>
